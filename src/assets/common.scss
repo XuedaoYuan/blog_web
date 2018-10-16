@@ -1,0 +1,51 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: #f7f7f7;
+    font-family: "Segoe UI", "Lucida Grande", Helvetica, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", Arial, sans-serif;
+}
+
+input {
+    border: none;
+    outline: none;
+}
+
+
+ol {
+    padding-left: 40px;
+}
+
+code {
+    color: red;
+}
+
+pre {
+    margin: 15px 0;
+    width: 100%;
+    overflow-x: scroll;
+    background-color: #eee;
+    font-family: monospace, monospace;
+    padding: 10px;
+    border-radius: 5px;
+
+    code {
+        width: 100%;
+        color: black;
+        line-height: 25px;
+        font-size: 14px;
+    }
+}
+
+h1 {
+    margin: 20px 0;
+}
+
+h2,
+h3,
+h4,
+h5 {
+    margin: 10px 0;
+}
