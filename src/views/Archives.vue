@@ -6,9 +6,14 @@
             <h1 class="title"><span @click="readArticleById(item.id)">{{item.title}}</span></h1>
         </div>
         <div class="page-info">
-            <span class="prev" @click="handlePrev">PREV</span>
-            <span class="next" @click="hanldeNext">NEXT</span>
+            <transition name="fade">
+                <span class="prev" v-show="start > 1" @click="handlePrev">PREV</span>
+            </transition>
+            <transition name="fade">
+                <span class="next" v-show="start < pages" @click="hanldeNext">NEXT</span>
+            </transition>
         </div>
+       
     </div>
 </template>
 <script>
@@ -21,7 +26,7 @@ export default {
             list: [],
 
             start: 1,
-
+            pages: 0,
         }
     },
     created() {
@@ -34,11 +39,12 @@ export default {
                 url: "/blogs/title",
                 method: "GET",
                 params: {
-
+                    start: vm.start
                 }
             }).then(res => {
                 console.log(res);
                 this.list = res.data.list;
+                this.pages = res.data.pages;
             })
         },
         readArticleById(id) {
@@ -50,8 +56,18 @@ export default {
                 }
             })
         },
-        handlePrev() {},
-        hanldeNext() {}
+        handlePrev() {
+            if (this.start > 1) {
+                this.start--;
+                this.queryTitles();
+            }
+        },
+        hanldeNext() {
+            if (this.start < this.pages) {
+                this.start++;
+                this.queryTitles();
+            }
+        }
 
     }
 }
@@ -97,16 +113,36 @@ export default {
 
     span {
         display: inline-block;
-        height: 40px;
-        border: 1px solid red;
-        line-height: 40px;
-        padding: 0 20px;
+        height: 34px;
+        color: #f03838;
+        border: 1px solid #e0e0e0;
+        line-height: 34px;
+        padding: 0 25px;
         border-radius: 20px;
         cursor: pointer;
+
+        &:hover {
+            color: #fff;
+            background-color: #f03838;
+        }
     }
 
     span.next {
         margin-left: 20px;
     }
+}
+
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity .5s;
+}
+
+.fade-enter,
+.fade-leave-to
+
+/* .fade-leave-active below version 2.1.8 */
+    {
+    opacity: 0;
 }
 </style>
